@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\ServiceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +21,11 @@ use App\Http\Controllers\CommentController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/services', [ServiceController::class, 'index']);
+Route::post('/services', [ServiceController::class, 'create']);
+Route::put('/services/{service}', [ServiceController::class, 'update']);
+Route::delete('/services/{service}', [ServiceController::class, 'delete']);
 
 Route::middleware('auth:api')->group(function () {
     Route::post('blogs', [BlogController::class, 'store']);
