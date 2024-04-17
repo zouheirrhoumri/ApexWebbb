@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\ServiceController;
 
 /*
@@ -26,6 +27,8 @@ Route::get('/services', [ServiceController::class, 'index']);
 Route::post('/services', [ServiceController::class, 'create']);
 Route::put('/services/{service}', [ServiceController::class, 'update']);
 Route::delete('/services/{service}', [ServiceController::class, 'delete']);
+
+Route::post('/reservations', [ReservationController::class, 'create']);
 
 Route::middleware('auth:api')->group(function () {
     Route::post('blogs', [BlogController::class, 'store']);

@@ -16,16 +16,12 @@ class ReservationController extends Controller
             'user_id' => 'required',
             'service_id' => 'required',
             'reservation_date' => 'required',
-            'reservation_time' => 'required',
-            'additional_info' => 'required',
         ]);
 
         $reservation = new Reservation();
         $reservation->user_id = $request->user_id;
         $reservation->service_id = $request->service_id;
         $reservation->reservation_date = $request->reservation_date;
-        $reservation->reservation_time = $request->reservation_time;
-        $reservation->additional_info = $request->additional_info;
         $reservation->save();
 
         $admin = User::where('role', 'admin')->first();
@@ -33,7 +29,7 @@ class ReservationController extends Controller
         if ($admin) {
             $admin->notify(new ReservationNotification($reservation));
         }
-        
+
         return response()->json(['message' => 'Reservation created successfully']);
     }
 }
