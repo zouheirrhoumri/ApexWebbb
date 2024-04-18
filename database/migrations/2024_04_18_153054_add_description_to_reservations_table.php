@@ -9,24 +9,20 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-  
-        public function up()
+    public function up(): void
     {
-        Schema::create('portfolio_projects', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->text('description');
-            $table->string('image');
-            $table->timestamps();
+        Schema::table('reservations', function (Blueprint $table) {
+            $table->text('description')->after('reservation_date');
         });
     }
-    
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('portfolio');
+        Schema::table('reservations', function (Blueprint $table) {
+            $table->dropColumn('description');
+        });
     }
 };

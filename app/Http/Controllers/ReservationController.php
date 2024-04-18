@@ -18,10 +18,14 @@ class ReservationController extends Controller
             'reservation_date' => 'required',
         ]);
 
-        $reservation = new Reservation();
-        $reservation->user_id = $request->user_id;
-        $reservation->service_id = $request->service_id;
-        $reservation->reservation_date = $request->reservation_date;
+        foreach ($request->service_ids as $service_id) {
+            $reservation = new Reservation();
+            $reservation->user_id = $request->user_id;
+            $reservation->service_id = $service_id;
+            $reservation->reservation_date = $request->reservation_date;
+
+            $reservation->save();
+        }
         $reservation->save();
 
         $admin = User::where('role', 'admin')->first();
