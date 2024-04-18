@@ -30,6 +30,8 @@ Route::put('/services/{service}', [ServiceController::class, 'update']);
 Route::delete('/services/{service}', [ServiceController::class, 'delete']);
 
 Route::post('/reservations', [ReservationController::class, 'create']);
+Route::put('/reservations/{reservation}/price', [ReservationController::class, 'setPrice']);
+Route::put('/reservations/{reservation}/response', [ReservationController::class, 'respondToPrice']);
 
 Route::get('/projects', [ProjectController::class, 'index']);
 Route::post('/projects', [ProjectController::class, 'store']);

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Reservation;
 use App\Models\User;
+use App\Notifications\PriceSetNotification;
 use App\Notifications\ReservationNotification;
 use Illuminate\Http\Request;
 
@@ -16,6 +17,7 @@ class ReservationController extends Controller
             'user_id' => 'required',
             'service_id' => 'required',
             'reservation_date' => 'required',
+            'description' => 'required',
         ]);
 
         foreach ($request->service_ids as $service_id) {
@@ -23,6 +25,7 @@ class ReservationController extends Controller
             $reservation->user_id = $request->user_id;
             $reservation->service_id = $service_id;
             $reservation->reservation_date = $request->reservation_date;
+            $reservation->description = $request->description;
 
             $reservation->save();
         }
@@ -35,5 +38,32 @@ class ReservationController extends Controller
         }
 
         return response()->json(['message' => 'Reservation created successfully']);
+    }
+    public function setPrice(Request $request, Reservation $reservation)
+    {
+        $request->validate([
+            'price' => 'required|numeric',
+        ]);
+
+        $reservation->price = $request->price;
+        $reservation->save();
+        $reservation->user->notify(new PriceSetNotification($reservation));
+
+        return response()->json(['message' => 'Price set successfully']);
+    }
+
+    public function respondToPrice(Request $request, Reservation $reservation)
+    {
+        $request->validate([
+            'accepted' => 'required|boolean',
+        ]);
+
+        if ($request->accepted) {
+            // handle price acceptance...
+        } else {
+            // handle price refusal...
+        }
+
+        return response()->json(['message' => 'Response recorded successfully']);
     }
 }
