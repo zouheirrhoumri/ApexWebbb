@@ -139,10 +139,12 @@ import {
     {
       id: "1",
       title: "Smart Automation",
+      text: collabText,
     },
     {
       id: "2",
       title: "Top-notch Security",
+      text: collabText,
     },
   ];
   

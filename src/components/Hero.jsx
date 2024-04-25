@@ -1,14 +1,9 @@
-import { curve, heroBackground, robot} from "../assets";
+import { curve } from "../assets";
+import apex from '../assets/hero/apex.png';
 // i want to import an image named apex
 // import { apex } from "../assets";
 import Button from "./Button";
-//import { BackgroundCircles, BottomLine, Gradient } from "./design/Hero";
-// import { heroIcons } from "../constants";
-// import { ScrollParallax } from "react-just-parallax";
-// import { useRef } from "react";
-// import Generating from "./Generating";
-// import Notification from "./Notification";
-// import CompanyLogos from "./CompanyLogos";
+
 
 const Hero = () => {
 
@@ -47,8 +42,8 @@ const Hero = () => {
 
               <div className="aspect-[33/40] rounded-b-[0.9rem] overflow-hidden md:aspect-[688/490] lg:aspect-[1024/490]">
                 <img
-                  src={robot}
-                  className="w-full scale-[1.7] translate-y-[8%] md:scale-[1] md:-translate-y-[10%] lg:-translate-y-[23%]"
+                  src={apex}
+                  className="w-full h-auto scale-[1.7] translate-y-[8%] md:scale-[1] md:-translate-y-[10%] lg:-translate-y-[23%]"
                   width={1024}
                   height={490}
                   alt="AI"
