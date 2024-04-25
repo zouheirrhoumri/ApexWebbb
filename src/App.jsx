@@ -1,15 +1,18 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom';
-const  App = () => {
+import Header from './components/Header';
+const App = () => {
 
   return (
     <>
-    <h1 className=''>hi there</h1>
-      <ul>
-        <li><Link to='/'>Home</Link></li>
-        <li><Link to='/products'>products</Link></li>
 
-      </ul>
+      <div className="pt-[4.75rem] lg:pt-[5.25rem] overflow-hidden">
+
+        <Header />
+        
+      </div>
+
+
     </>
   );
 }
