@@ -146,6 +146,21 @@ import {
       title: "Top-notch Security",
       text: collabText,
     },
+     {
+      id: "0",
+      title: "Seamless Integration",
+      text: collabText,
+    },
+    {
+      id: "1",
+      title: "Smart Automation",
+      text: collabText,
+    },
+    {
+      id: "2",
+      title: "Top-notch Security",
+      text: collabText,
+    },
   ];
   
   export const collabApps = [
