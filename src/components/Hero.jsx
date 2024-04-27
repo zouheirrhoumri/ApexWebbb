@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { curve } from "../assets";
 import apex from '../assets/hero/apex.png';
 // i want to import an image named apex
@@ -30,9 +31,10 @@ const Hero = () => {
           <p className="body-1 max-w-3xl mx-auto mb-6 text-n-2 lg:mb-8">
           Empower your brand's online presence with ApexWeb's innovative web design and marketing solutions.
           </p>
-          <Button href="/pricing" white>
+          <Link className="button relative inline-flex items-center justify-center h-11 text-n-1 transition-colors  hover:text-color-1"
+           to="/services" >
             Get started
-          </Button>
+          </Link>
         </div>
         <div className="relative max-w-[23rem] mx-auto md:max-w-5xl xl:mb-24">
           <div className="relative z-1 p-0.5 rounded-2xl bg-conic-gradient">

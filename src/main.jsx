@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import Products from './Products.jsx'
-
+import Services from './Services.jsx'
 import './index.css'
 import {
   BrowserRouter as Router,
@@ -18,6 +18,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <Routes>
         <Route index path="/" element={<App />} />
         <Route path="/products" element={<Products />} />
+        <Route path="/services" element={<Services />} />
 
       </Routes>
     </Router>
