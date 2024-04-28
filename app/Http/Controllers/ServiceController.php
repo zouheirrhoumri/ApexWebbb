@@ -13,6 +13,11 @@ class ServiceController extends Controller
         return response()->json(['services' => $services]);
     }
 
+    public function show(Service $service)
+    {
+        return response()->json(['service' => $service]);
+    }
+    
     public function create(Request $request)
     {
         $request->validate([
@@ -24,7 +29,7 @@ class ServiceController extends Controller
         $service->name = $request->name;
         $service->description = $request->description;
         $service->save();
-    
+
         return response()->json(['message' => 'Service created successfully']);
     }
 
@@ -38,7 +43,7 @@ class ServiceController extends Controller
         $service->name = $request->name;
         $service->description = $request->description;
         $service->save();
-    
+
         return response()->json(['message' => 'Service updated successfully']);
     }
 
@@ -47,5 +52,4 @@ class ServiceController extends Controller
         $service->delete();
         return response()->json(['message' => 'Service deleted successfully']);
     }
-
 }

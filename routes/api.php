@@ -26,6 +26,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('/services', [ServiceController::class, 'index']);
 Route::post('/services', [ServiceController::class, 'create']);
+Route::get('/services/{service}', [ServiceController::class, 'show']);
 Route::put('/services/{service}', [ServiceController::class, 'update']);
 Route::delete('/services/{service}', [ServiceController::class, 'delete']);
 
@@ -40,14 +41,15 @@ Route::put('/projects/{project}', [ProjectController::class, 'update']);
 Route::delete('/projects/{project}', [ProjectController::class, 'destroy']);
 
 Route::middleware('auth:api')->group(function () {
-    Route::post('blogs', [BlogController::class, 'store']);
-    Route::get('blogs/{blog}', [BlogController::class, 'show']);
-    Route::get('blogs/{blog}/edit', [BlogController::class, 'edit']);
-    Route::post('posts/{postId}/comments', [CommentController::class, 'store']);
 });
+Route::get('blogs', [BlogController::class, 'index']);
+Route::post('blogs', [BlogController::class, 'store']);
+Route::get('blogs/{blog}', [BlogController::class, 'show']);
+Route::get('blogs/{blog}/edit', [BlogController::class, 'edit']);
+Route::post('posts/{postId}/comments', [CommentController::class, 'store']);
 
 
-Route::post('register',[AuthController::class,'register']);
-Route::post('login', [AuthController::class,'login']);
-Route::post('refresh', [AuthController::class,'refresh']);
-Route::post('logout', [AuthController::class,'logout']);
+Route::post('register', [AuthController::class, 'register']);
+Route::post('login', [AuthController::class, 'login']);
+Route::post('refresh', [AuthController::class, 'refresh']);
+Route::post('logout', [AuthController::class, 'logout']);
