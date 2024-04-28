@@ -18,7 +18,7 @@ export default function EditService() {
 
     const fetchService = async () => {
 
-        await axios.get('http://127.0.0.1:8000/api/services' + id)
+        await axios.get(`http://127.0.0.1:8000/api/services/${id}`)
             .then(({ data }) => {
                 const { title, description } = data.service;
                 setTitle(title)
@@ -56,7 +56,7 @@ export default function EditService() {
         <div className="container mx-auto px-4">
             <div className="flex flex-col items-center justify-center py-20">
                 <h1 className="text-4xl font-bold text-center">EDIT YOUR SERVICE</h1>
-                <p className="text-center text-lg mt-4">Fill out the form below to get a quote.</p>
+                <p className="text-center text-lg mt-4">Fill out the form below to edit the service.</p>
                 <form className="w-full max-w-lg mt-8" onSubmit={editService}>
                     <input value={title} onChange={(e) => setTitle(e.target.value)}
                         className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-4" type="text" placeholder="Service Name" />
