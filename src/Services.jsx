@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import { Axios } from 'axios';
 import Header from './components/Header';
+import Footer from './components/Footer';
 
 
 export default function Services() {
@@ -38,6 +39,8 @@ export default function Services() {
             <h2 className="text-2xl font-bold">Web Development</h2>
             <p className="mt-4">We build websites that are fast, secure, and easy to manage.</p>
             <Link to="/ServiceForm" className="mt-24 inline-block bg-white text-n-7 px-6 py-3 rounded-lg self-end">Reserve</Link>
+            <Link to="/editService" className="mt-24 ml-12 inline-block bg-white text-n-7 px-6 py-3 rounded-lg self-end">edit</Link>
+
           </div>
           <div className="bg-n-7 p-8 rounded-lg backdrop-filter backdrop-blur-lg bg-opacity-40 border border-white border-opacity-20 shadow-lg transform hover:scale-105 transition-transform duration-200">
             <h2 className="text-2xl font-bold">Mobile Development</h2>
@@ -50,9 +53,10 @@ export default function Services() {
         </div>
       </div>
 
-      <div className="flex justify-center mt-10">
+      <div className="flex justify-center my-16">
         <Link to="/contact" className="bg-n-7 text-white px-6 py-3 rounded-lg">Contact Us</Link>
       </div>
+      <Footer />
     </>
   )
 }
