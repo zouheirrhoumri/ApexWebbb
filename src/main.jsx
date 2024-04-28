@@ -22,7 +22,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path="/products" element={<Products />} />
         <Route path="/services" element={<Services />} />
         <Route path="/ServiceForm" element={<ServiceForm />} />
-        <Route path="/editService" element={<EditService />} />
+        <Route path="/editService/:id" element={<EditService />} />
   
       </Routes>
     </Router>

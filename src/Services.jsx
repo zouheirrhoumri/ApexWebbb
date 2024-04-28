@@ -30,13 +30,12 @@ export default function Services() {
   const deleteService = async (id) => {
 
     await axios.delete(`http://127.0.0.1:8000/api/services/${id}`)
-      .then(({ data }) => {
-        console.log(response.data.message)
+      try {
+        await axios.delete(`http://127.0.0.1:8000/api/services/${id}`);
         fetchServices();
+      } catch (error) {
+        console.error("Failed to delete service:", error);
       }
-      ).catch(({ response }) => {
-        console.log(response.data.message)
-      })
 
   }
 
@@ -59,6 +58,7 @@ export default function Services() {
               <p className="mt-4 text-white">{service.description}</p>
               <Link to="/quote" className="mt-6 inline-block bg-white text-n-7 px-6 py-3 rounded-lg">Reserve</Link>
               <Link to={`/editService/${service.id}`} className="mt-6 ml-12 inline-block bg-white text-n-7 px-6 py-3 rounded-lg">Edit</Link>
+              <button onClick={() => deleteService(service.id)} className="mt-6 ml-12 inline-block bg-red-500 text-white px-6 py-3 rounded-lg">Delete</button>
             </div>
           ))}
         </div>

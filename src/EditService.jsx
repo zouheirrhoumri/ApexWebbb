@@ -9,48 +9,41 @@ export default function EditService() {
     const navigate = useNavigate();
     const { id } = useParams();
 
-    const [title, setTitle] = useState('')
+    const [name, setName] = useState('');
     const [description, setDescription] = useState('')
 
     useEffect(() => {
         fetchService();
     }, [])
-
+    
     const fetchService = async () => {
-
         await axios.get(`http://127.0.0.1:8000/api/services/${id}`)
             .then(({ data }) => {
-                const { title, description } = data.service;
-                setTitle(title)
+                const { name, description } = data.service;
+                setName(name)
                 setDescription(description)
             }
             ).catch(({ response }) => {
                 console.log(response.data.message)
             })
-
     }
     const editService = async (e) => {
         e.preventDefault();
-        const formData = new FormData();
-        formData.append('_method', 'PUT')
-        formData.append('name', title)
-        formData.append('description', description)
-
-        await axios.post('http://127.0.0.1:8000/api/services', formData)
+    
+        const serviceData = {
+            name: name,
+            description: description
+        };
+    
+        await axios.put(`http://127.0.0.1:8000/api/services/${id}`, serviceData)
             .then(({ data }) => {
                 console.log(data.message)
                 navigate('/services')
             }
             ).catch(({ response }) => {
-                if (response.status = 442) {
-                    console.log(response.data.message)
-                } else {
-                    console.log(response.data.message)
-                }
+                console.log(response.data.message)
             })
-
     }
-
 
     return (
         <div className="container mx-auto px-4">
@@ -58,7 +51,7 @@ export default function EditService() {
                 <h1 className="text-4xl font-bold text-center">EDIT YOUR SERVICE</h1>
                 <p className="text-center text-lg mt-4">Fill out the form below to edit the service.</p>
                 <form className="w-full max-w-lg mt-8" onSubmit={editService}>
-                    <input value={title} onChange={(e) => setTitle(e.target.value)}
+                    <input value={name} onChange={(e) => setName(e.target.value)}
                         className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-4" type="text" placeholder="Service Name" />
 
                     <textarea value={description} onChange={(e) => setDescription(e.target.value)}
