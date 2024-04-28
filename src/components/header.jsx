@@ -80,17 +80,17 @@ const Header = () => {
         >
           New account
         </a>
-        <button className="hidden lg:flex" href="#login">
+        <Button className="hidden lg:flex" href="#login">
           Sign in
-        </button>
+        </Button>
 
-        <button
+        <Button
           className="ml-auto lg:hidden"
           px="px-3"
           onClick={toggleNavigation}
         >
           <MenuSvg openNavigation={openNavigation} />
-        </button>
+        </Button>
       </div>
     </div>
   );

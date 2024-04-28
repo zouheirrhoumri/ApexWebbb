@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import Products from './Products.jsx'
 import Services from './Services.jsx'
+import QuoteForm from './ServiceForm.jsx'
 import './index.css'
 import {
   BrowserRouter as Router,
@@ -10,6 +11,7 @@ import {
   Route,
   Link
 } from "react-router-dom";
+import ServiceForm from './ServiceForm.jsx'
 ReactDOM.createRoot(document.getElementById('root')).render(
 
   <React.StrictMode>
@@ -19,6 +21,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route index path="/" element={<App />} />
         <Route path="/products" element={<Products />} />
         <Route path="/services" element={<Services />} />
+        <Route path="/ServiceForm" element={<ServiceForm />} />
 
       </Routes>
     </Router>
