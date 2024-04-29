@@ -49,7 +49,7 @@ Route::get('blogs/{blog}/edit', [BlogController::class, 'edit']);
 Route::post('posts/{postId}/comments', [CommentController::class, 'store']);
 
 
-Route::post('register', [AuthController::class, 'register']);
-Route::post('login', [AuthController::class, 'login']);
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/login', [AuthController::class, 'login']);
 Route::post('refresh', [AuthController::class, 'refresh']);
 Route::post('logout', [AuthController::class, 'logout']);
