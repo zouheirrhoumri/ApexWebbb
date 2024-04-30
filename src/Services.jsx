@@ -11,7 +11,7 @@ export default function Services() {
   const { id } = useParams();
 
   const [service, setService] = useState([]);
-  
+
   useEffect(() => {
     fetchServices();
   }, [])
@@ -26,16 +26,16 @@ export default function Services() {
 
   }
 
- 
+
   const deleteService = async (id) => {
 
     await axios.delete(`http://127.0.0.1:8000/api/services/${id}`)
-      try {
-        await axios.delete(`http://127.0.0.1:8000/api/services/${id}`);
-        fetchServices();
-      } catch (error) {
-        console.error("Failed to delete service:", error);
-      }
+    try {
+      await axios.delete(`http://127.0.0.1:8000/api/services/${id}`);
+      fetchServices();
+    } catch (error) {
+      console.error("Failed to delete service:", error);
+    }
 
   }
 
@@ -56,16 +56,18 @@ export default function Services() {
             <div key={service.id} className="bg-n-7 p-8 rounded-lg backdrop-filter backdrop-blur-lg bg-opacity-40 border border-white border-opacity-20 shadow-lg transform hover:scale-105 transition-transform duration-200">
               <h2 className="text-2xl font-bold text-white">{service.name}</h2>
               <p className="mt-4 text-white">{service.description}</p>
-              <Link to="/quote" className="mt-6 inline-block bg-white text-n-7 px-6 py-3 rounded-lg">Reserve</Link>
-              <Link to={`/editService/${service.id}`} className="mt-6 ml-12 inline-block bg-white text-n-7 px-6 py-3 rounded-lg">Edit</Link>
-              <button onClick={() => deleteService(service.id)} className="mt-6 ml-12 inline-block bg-red-500 text-white px-6 py-3 rounded-lg">Delete</button>
+              <div className="flex space-x-4 mt-6">
+                <Link to="/quote" className="inline-block bg-white text-n-7 px-6 py-3 rounded-lg">Reserve</Link>
+                <Link to={`/editService/${service.id}`} className="inline-block bg-white text-n-7 px-6 py-3 rounded-lg">Edit</Link>
+                <button onClick={() => deleteService(service.id)} className="inline-block bg-red-500 text-white px-6 py-3 rounded-lg">Delete</button>
+              </div>
             </div>
           ))}
         </div>
       </div>
 
       <div className="flex justify-center my-16">
-        <Link to="/contact" className="bg-n-7 text-white px-6 py-3 rounded-lg">Contact Us</Link>
+        <Link to="/ServiceForm" className="bg-n-7 text-white px-6 py-3 rounded-lg">Add a service</Link>
       </div>
       <Footer />
     </>
