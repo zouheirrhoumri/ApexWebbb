@@ -12,7 +12,7 @@ import Login from "./Login.jsx";
 import Statistics from "./Statistics.jsx";
 import { adminChecker, tokenChecker } from "./utils/checker.js";
 import Quote from "./Quote.jsx";
-import Blog from './Blog.jsx'
+// import Blog from './Blog.jsx'
 
 const isAdmin = adminChecker();
 const isAuthenticated = tokenChecker();
@@ -30,7 +30,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         {!isAuthenticated && <Route path="/login" element={<Login />} />}
         {!isAuthenticated && <Route path="/register" element={<Register />} />}
         {isAuthenticated && <Route path="/quote" element={<Quote />} />}
-        <Route path="/blog" element={<Blog />} />
+        {/* <Route path="/blog" element={<Blog />} /> */}
         {isAdmin && isAuthenticated && (
           <Route path="/statistics" element={<Statistics />} />
         )}
