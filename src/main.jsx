@@ -14,7 +14,7 @@ import ServiceForm from './ServiceForm.jsx'
 import EditService from './EditService.jsx'
 import Register from './Register.jsx'
 import Login from './Login.jsx'
-// import Blog from './Blog.jsx'
+import Blog from './Blog.jsx'
 ReactDOM.createRoot(document.getElementById('root')).render(
 
   <React.StrictMode>
@@ -28,7 +28,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path="/editService/:id" element={<EditService />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
-        {/* <Route path="/blog" element={<Blog />} /> */}
+        <Route path="/blog" element={<Blog />} />
 
       </Routes>
     </Router>
