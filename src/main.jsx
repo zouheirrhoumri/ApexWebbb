@@ -15,6 +15,8 @@ import EditService from './EditService.jsx'
 import Register from './Register.jsx'
 import Login from './Login.jsx'
 import Blog from './Blog.jsx'
+import BlogPost from './BlogPost.jsx'
+
 ReactDOM.createRoot(document.getElementById('root')).render(
 
   <React.StrictMode>
@@ -29,6 +31,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/blog" element={<Blog />} />
+        <Route path={`/blog/:id` } element={<BlogPost />} />
+        
+        
 
       </Routes>
     </Router>
