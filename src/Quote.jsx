@@ -1,21 +1,32 @@
 import Button from "./components/Button";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
-import { useState } from "react";
+import { useLayoutEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { getUser, tokenChecker } from "./utils/checker";
 
 export default function Quote() {
   const [description, setDescription] = useState("");
-
+  let service_id = localStorage.getItem("serviceId");
   const navigate = useNavigate();
 
-  async function handleReservation() {
+  useLayoutEffect(() => {
+    if (!service_id) navigate("/services");
+    if (!tokenChecker()) navigate("/login");
+  }, []);
+
+  async function handleReservation(e) {
+    e.preventDefault();
+    service_id = JSON.parse(service_id);
+    const user = getUser();
     try {
       const response = await axios.post(
         "http://127.0.0.1:8000/api/reservations",
         {
           description,
+          service_id,
+          user_id: user.id,
         },
         {
           headers: {
@@ -25,10 +36,8 @@ export default function Quote() {
       );
       if (response.status === 200) {
         const data = response.data;
-        console.log(data.status);
-        localStorage.setItem("authToken", JSON.stringify(data.authorisation));
-        localStorage.setItem("user", JSON.stringify(data.user));
-        navigate("/");
+        console.log(data);
+        navigate("/services");
       }
     } catch (error) {
       console.error(error);
@@ -46,7 +55,12 @@ export default function Quote() {
             <p className="text-center text-lg mt-4">
               Fill out the form below to make a reservation.
             </p>
-            <form className="w-full max-w-lg mt-8" onSubmit={handleReservation}>
+            <form
+              className="w-full max-w-lg mt-8"
+              onSubmit={(e) => {
+                handleReservation(e);
+              }}
+            >
               <textarea
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}

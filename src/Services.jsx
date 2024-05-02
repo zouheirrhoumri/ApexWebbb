@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import React, { useEffect, useLayoutEffect, useState } from "react";
 import axios from "axios";
 import Header from "./components/Header";
@@ -6,11 +6,12 @@ import Footer from "./components/Footer";
 import { adminChecker, tokenChecker } from "./utils/checker";
 
 export default function Services() {
-  const { id } = useParams();
+  const { id, setId } = useState(null);
 
   const [service, setService] = useState([]);
   const [authenticated, setAuthenticated] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
+  const navigate = useNavigate();
 
   useLayoutEffect(() => {
     if (!tokenChecker()) return;
@@ -39,6 +40,11 @@ export default function Services() {
     }
   };
 
+  function handleReservationService(serviceId) {
+    localStorage.setItem("serviceId", JSON.stringify(serviceId));
+    navigate("/quote");
+  }
+
   return (
     <>
       <Header />
@@ -63,12 +69,14 @@ export default function Services() {
               <p className="mt-4 text-white">{service.description}</p>
               <div className="flex space-x-4 mt-6">
                 {authenticated && (
-                  <Link
-                    to="/quote"
+                  <button
+                    onClick={() => {
+                      handleReservationService(service.id);
+                    }}
                     className="inline-block bg-white text-n-7 px-6 py-3 rounded-lg"
                   >
                     Reserve
-                  </Link>
+                  </button>
                 )}
                 {isAdmin && (
                   <Link

@@ -12,3 +12,10 @@ export function adminChecker() {
   if (user.role !== "admin") return false;
   return true;
 }
+
+export function getUser() {
+  let user = localStorage.getItem("user");
+  if (!user) return false;
+  user = JSON.parse(user);
+  return user;
+}
