@@ -16,29 +16,25 @@ class ReservationController extends Controller
         $request->validate([
             'user_id' => 'required',
             'service_id' => 'required',
-            'reservation_date' => 'required',
             'description' => 'required',
         ]);
 
-        foreach ($request->service_ids as $service_id) {
-            $reservation = new Reservation();
-            $reservation->user_id = $request->user_id;
-            $reservation->service_id = $service_id;
-            $reservation->reservation_date = $request->reservation_date;
-            $reservation->description = $request->description;
-
-            $reservation->save();
-        }
+        $reservation = new Reservation();
+        $reservation->user_id = $request->user_id;
+        $reservation->service_id = $request->service_id;
+        $reservation->reservation_date = date("Y-m-d H:i:s");
+        $reservation->description = $request->description;
         $reservation->save();
 
-        $admin = User::where('role', 'admin')->first();
+/*        $admin = User::where('role', 'admin')->first();
 
         if ($admin) {
             $admin->notify(new ReservationNotification($reservation));
-        }
+        }*/
 
         return response()->json(['message' => 'Reservation created successfully']);
     }
+
     public function setPrice(Request $request, Reservation $reservation)
     {
         $request->validate([
