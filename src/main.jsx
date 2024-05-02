@@ -12,8 +12,8 @@ import Login from "./Login.jsx";
 import Statistics from "./Statistics.jsx";
 import { adminChecker, tokenChecker } from "./utils/checker.js";
 import Quote from "./Quote.jsx";
-// import Blog from './Blog.jsx'
-
+import Blog from './Blog.jsx'
+import BlogPost from './BlogPost.jsx'
 const isAdmin = adminChecker();
 const isAuthenticated = tokenChecker();
 ReactDOM.createRoot(document.getElementById("root")).render(
@@ -34,6 +34,10 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         {isAdmin && isAuthenticated && (
           <Route path="/statistics" element={<Statistics />} />
         )}
+        <Route path="/blog" element={<Blog />} />
+        <Route path="/blog/:id" element={<BlogPost />} />
+
+
       </Routes>
     </Router>
     {/* <App /> */}
