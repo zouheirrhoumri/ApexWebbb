@@ -1,9 +1,31 @@
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import Table from "./components/Table";
 import StatsCard from "./StatsCard";
+import { useEffect, useLayoutEffect, useState } from "react";
+import { adminChecker, tokenChecker } from "./utils/checker";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import ReservationTable from "./components/RservationsTable";
 
 export default function Statistics() {
+  const [data, setData] = useState({});
+  const navigate = useNavigate();
+
+  useLayoutEffect(() => {
+    if (!tokenChecker()) return;
+    if (!adminChecker()) navigate("/");
+  }, []);
+
+  useEffect(() => {
+    fetchServices();
+  }, []);
+
+  const fetchServices = async () => {
+    await axios.get("http://127.0.0.1:8000/api/stats").then(({ data }) => {
+      console.log(data);
+      setData(data.data);
+    });
+  };
   return (
     <>
       <Header />
@@ -11,59 +33,19 @@ export default function Statistics() {
         {/* Stats Row */}
         <div className="flex justify-center  py-10 p-14">
           <StatsCard
-            title="BT SUBSCRIBERS"
-            total="20,456"
-            bgColor="bg-red-400"
-          />
-          <StatsCard
-            title="BT ACTIVE SUBSCRIBERS"
-            total="19,694"
+            title="Services"
+            total={data.usersCount}
             bgColor="bg-blue-500"
           />
-          <StatsCard title="BT OPT OUTS" total="711" bgColor="bg-purple-400" />
+          <StatsCard title="Services" total={data.servicesCount} bgColor="bg-purple-400" />
           <StatsCard
-            title="BT TODAY'S SUBSCRIPTION"
-            total="0"
+            title="Reservations"
+            total={data.reservationsCount}
             bgColor="bg-purple-900"
           />
         </div>
 
-        {/* Table Row */}
-        <div className="flex justify-center py-10 p-5">
-          <Table
-            title="Table 1"
-            headers={["KEYWORDS", "TOTAL ENTRIES"]}
-            data={[
-              ["Bible", "11,980"],
-              ["Blah", "340"],
-              ["Blah", "901"],
-              ["Blah", "11,950"],
-              ["Blah", "459"],
-            ]}
-          />
-          <Table
-            title="Table 2"
-            headers={["MSISDN", "ENTRIES"]}
-            data={[
-              ["26809304030", "495,455"],
-              ["26809304030", "495,455"],
-              ["26809304030", "495,455"],
-              ["26809304030", "32,333"],
-              ["26809304030", "31,199"],
-            ]}
-          />
-          <Table
-            title="Table 3"
-            headers={["MSISDN", "POINTS"]}
-            data={[
-              ["28679609009", "11,290"],
-              ["28679609009", "9,230"],
-              ["28679609009", "234"],
-              ["28679609009", "56,230"],
-              ["28679609009", "323"],
-            ]}
-          />
-        </div>
+        <ReservationTable reservations={data.reservations}/>
       </main>
       <Footer />
     </>

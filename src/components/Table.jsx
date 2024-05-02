@@ -1,7 +1,9 @@
+// Generic table component
 export default function Table({ title, headers, data }) {
   return (
     <div className="container mx-auto shadow-xl my-6">
       <div className="w-11/12 mx-auto">
+        <h2 className="text-xl font-bold mb-4">{title}</h2>
         <table className="text-left w-full border-collapse">
           <thead>
             <tr>
