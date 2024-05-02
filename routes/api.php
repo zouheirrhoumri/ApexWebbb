@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\StatsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
@@ -41,6 +42,7 @@ Route::put('/projects/{project}', [ProjectController::class, 'update']);
 Route::delete('/projects/{project}', [ProjectController::class, 'destroy']);
 
 Route::middleware('auth:api')->group(function () {
+
 });
 Route::get('blogs', [BlogController::class, 'index']);
 Route::post('blogs', [BlogController::class, 'store']);
@@ -48,6 +50,7 @@ Route::get('blogs/{blog}', [BlogController::class, 'show']);
 Route::get('blogs/{blog}/edit', [BlogController::class, 'edit']);
 Route::post('posts/{postId}/comments', [CommentController::class, 'store']);
 
+Route::get('stats', [StatsController::class, 'index']);
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
