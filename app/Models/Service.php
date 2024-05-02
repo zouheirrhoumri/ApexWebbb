@@ -12,4 +12,8 @@ class Service extends Model
         'name',
         'description'
     ];
+
+    function reservations() {
+        return $this->hasMany(Reservation::class);
+    }
 }
