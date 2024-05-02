@@ -15,4 +15,11 @@ class Reservation extends Model
         'description',
         'price'
     ];
+
+    function service() {
+        return $this->belongsTo(Service::class);
+    }
+    function user() {
+        return $this->belongsTo(User::class);
+    }
 }
